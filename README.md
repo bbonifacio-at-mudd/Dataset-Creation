@@ -1,6 +1,11 @@
-# Dataset-Creation
- Creates the chips dataset using the data scraped from Chip-Scraper
+# Dataset Creation Documentation
+Creates the chips dataset using the data scraped from Chip-Scraper
 
+This repository is structured as follows: 
+- Backgrounds: the choice of background images we want to use. If we want to use different backgrounds, we can just create a new subfolder in this.
+- Chips: the Table Chips. We have uncropped and circle-cropped. I went through and cleaned the circle-cropped, and I put the few bad images in the badChips folder.
+- Dataset: the datasets we're going to make with the chips on the backgrounds
+- Notebooks: the jupyter notebooks used to run the code. Why jupyter notebook? no specific reason, it just feels nice. if you want, feel free to copy-paste it into a .py file to run it. Each notebook is specific for cropping or making a specific type of dataset, such as Singleton vs. Multiple
 
 Here are the different types of datasets this will make: 
 

@@ -7,6 +7,13 @@ This repository is structured as follows:
 - Dataset: the datasets we're going to make with the chips on the backgrounds
 - Notebooks: the jupyter notebooks used to run the code. Why jupyter notebook? no specific reason, it just feels nice. if you want, feel free to copy-paste it into a .py file to run it. Each notebook is specific for cropping or making a specific type of dataset, such as Singleton vs. Multiple
 
+As a note, although 99%+ of the original Table Chips were good data, there was a small proportion that wasn't and needed to be cleaned manually. For example, consider the following few that weren't very good: 
+![image](https://github.com/bbonifacio-at-mudd/Dataset-Creation/assets/114462423/d35c8287-e856-4500-a4f3-01198fb13837)
+
+
+
+
+
 Here are the different types of datasets this will make: 
 
 1. Singleton Chips - A single random chip on a random background with a random position (such that the entire chip is in the image) and a random rotation.

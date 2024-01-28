@@ -24,6 +24,8 @@ class dataset():
                 self.background_dir = "../Backgrounds/Random"
             elif self.background == "table":
                 self.background_dir = "../Backgrounds/Table"
+            elif self.background == "simple":
+                self.background_dir = "../Backgrounds/Simple"
             else:
                 raise Exception(f"Unsupported background type: {self.background}")
             

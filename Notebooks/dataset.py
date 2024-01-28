@@ -7,7 +7,7 @@ class dataset():
 
     def __init__(self, size, folder_name, settings):
         self.size = size
-        self.folder_name = folder_name
+        self.folder_name = "../Dataset/" + folder_name
         self.settings = settings
         self.extract_settings()
         self.backgrounds = []
@@ -30,7 +30,7 @@ class dataset():
             # Extracting chips settings
             self.chips = self.data_settings["chips"]
             if self.chips == "all":
-                self.chips_dir = "../Chips/All"
+                self.chips_dir = "../Chips/CleanedCroppedChips"
             elif self.chips == "post2020":
                 self.chips_dir = "../Chips/Post2020"
             else:
@@ -108,6 +108,10 @@ class dataset():
                 print(f"Deleted {self.folder_name}")
             else:
                 raise Exception(f"Dataset folder {self.folder_name} already exists. Exiting...")
+
+        # Create the dataset folder
+        os.mkdir(self.folder_name)
+        print(f"Created {self.folder_name}")
 
     def create_singleton_dataset(self):
         # Create the dataset

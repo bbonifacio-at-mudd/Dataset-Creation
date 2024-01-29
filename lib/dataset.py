@@ -1,4 +1,4 @@
-#This file is not a script - don't run it
+#This file is not a script - only use it from the Dataset Creation jupyter notebook
 
 class dataset():
     """

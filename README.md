@@ -3,20 +3,14 @@ Creates the chips dataset using the data scraped from Chip-Scraper repo: https:/
 
 This repository is structured as follows: 
 - Backgrounds: the choice of background images we want to use. If we want to use different backgrounds, we can just create a new subfolder in this.
-- Chips: the Table Chips. We have uncropped and circle-cropped. I went through and cleaned the circle-cropped, and I put the few bad images in the badChips folder.
-- Dataset: the datasets we're going to make with the chips on the backgrounds
-- Notebooks: the jupyter notebooks used to run the code. Why jupyter notebook? no specific reason, it just feels nice. if you want, feel free to copy-paste it into a .py file to run it. Each notebook is specific for cropping or making a specific type of dataset, such as Singleton vs. Multiple
+- Chips: the Table Chips. We have uncropped and circle-cropped. I went through and cleaned the circle-cropped, and I put the few bad images in the badChips folder. If we want other objects to overlay on the backgrounds, we just create a new subfolder in this.
+- Dataset: the resulting datasets that are created.  
+- lib: Supporting files and Jupyter notebooks.
+- Dataset Creation.ipynb - The Primary Notebook for this repo that controls everything. If you want to make a dataset, open this file, fill in the settings within the file, and make your dataset!
 
-As a note, although 99%+ of the original Table Chips were good data, there was a small proportion that wasn't and needed to be cleaned manually. For example, consider the following few that weren't very good: 
-![image](https://github.com/bbonifacio-at-mudd/Dataset-Creation/assets/114462423/d35c8287-e856-4500-a4f3-01198fb13837)
+Below, I include some example images created by this dataset. To figure out how everything works, open the Dataset Creation jupyter notebook and read through the settings: 
 
+![image](https://github.com/bbonifacio-at-mudd/Dataset-Creation/assets/114462423/f3c9bfa4-c4eb-479d-818c-f0b4d2b9cd10)
+![image](https://github.com/bbonifacio-at-mudd/Dataset-Creation/assets/114462423/0bd989ab-3de1-43ba-984c-0a2d76afef07)
+![image](https://github.com/bbonifacio-at-mudd/Dataset-Creation/assets/114462423/9c3b7a92-dce3-401d-9fa2-720b6f3d0040)
 
-
-
-
-Here are the different types of datasets this will make: 
-
-1. Singleton Chips - A single random chip on a random background with a random position (such that the entire chip is in the image) and a random rotation.
-2. Multiple Chips - Same as Singleton Chips, except there are multiple chips on the page (random number between 2-10?). This is done such that the chips do not overlap with each other. 
-3. Stacked Chips - Unsure about how this one works, need to ask.
-4. Overlaid Chips - Also unsure about this one. I assume this is equivalent to multiple chips except that the chips overlap with each other (but not entirely?)

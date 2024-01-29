@@ -22,10 +22,14 @@ class dataset():
             self.background = self.data_settings["background"]
             if self.background == "random":
                 self.background_dir = "../Backgrounds/Random"
-            elif self.background == "table":
-                self.background_dir = "../Backgrounds/Table"
+            elif self.background == "walls":
+                self.background_dir = "../Backgrounds/Walls"
             elif self.background == "simple":
                 self.background_dir = "../Backgrounds/Simple"
+            elif self.background == "desktop_backgrounds":
+                self.background_dir = "../Backgrounds/Desktop_Backgrounds"
+            elif self.background == "landscape":
+                self.background_dir = "../Backgrounds/Landscape"
             else:
                 raise Exception(f"Unsupported background type: {self.background}")
             
@@ -124,22 +128,21 @@ class dataset():
 
             output_image_path = os.path.join(self.folder_name, f"{i}.png")
 
-            # Place the chip on the background
-
             # Load the chip and background images
             chip = Image.open(selected_chip).convert("RGBA")
             background = Image.open(selected_background).convert("RGBA")
 
-            # Randomly rotate the chip
-            angle = random.randint(0, 359)
-            chip = chip.rotate(angle, expand=1)
+            # Randomly rotate the chip if desired
+            if self.singleton_settings["random_rotation"]:
+                angle = random.randint(0, 360)
+                chip = chip.rotate(angle, expand=1)
 
             # Background dimensions
             bg_width, bg_height = background.size
-
                     
-            # Determine a random scale factor based on the background width
-            scale_factor = random.uniform(0.1, 0.3)
+            # Determine a random scale factor based on the background width and settings
+            self.size_range = self.singleton_settings["size_range"]
+            scale_factor = random.uniform(self.size_range[0], self.size_range[1])
             new_chip_width = int(bg_width * scale_factor)
 
             # Calculate new height to maintain aspect ratio
@@ -166,8 +169,6 @@ class dataset():
 
             # Save the combined image to the output path
             background.save(output_image_path)
-
-
 
 
 

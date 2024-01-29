@@ -1,5 +1,5 @@
 # Dataset Creation Documentation
-Creates the chips dataset using the data scraped from Chip-Scraper repo: https://github.com/bbonifacio-at-mudd/Chip-Scraper/tree/main
+Creates a dataset using object images (such as Table Chips) and Background Images. It does this by placing the object images on top of the Background Images in a way that you can control with the settings. Chip objects are retrieved from the Chip-Scraper repo: https://github.com/bbonifacio-at-mudd/Chip-Scraper/tree/main
 
 This repository is structured as follows: 
 - Backgrounds: the choice of background images we want to use. If we want to use different backgrounds, we can just create a new subfolder in this.

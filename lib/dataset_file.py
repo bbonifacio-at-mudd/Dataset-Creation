@@ -16,7 +16,7 @@ class dataset_class():
     def extract_settings(self):
         try: 
             # Extracting data settings
-            self.data_settings = self.settings["data"]
+            self.data_settings = self.settings["data"] 
 
             # Extracting background settings
             self.background = self.data_settings["background"]

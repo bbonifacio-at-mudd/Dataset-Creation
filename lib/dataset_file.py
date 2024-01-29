@@ -20,6 +20,8 @@ class dataset_class():
 
             # Extracting background settings
             self.background = self.data_settings["background"]
+            self.background_dir = "Backgrounds/"+self.background
+            """
             if self.background == "random":
                 self.background_dir = "Backgrounds/Random"
             elif self.background == "walls":
@@ -32,9 +34,12 @@ class dataset_class():
                 self.background_dir = "Backgrounds/Landscape"
             else:
                 raise Exception(f"Unsupported background type: {self.background}")
+            """
             
             # Extracting chips settings
             self.chips = self.data_settings["chips"]
+            self.chips_dir = "Chips/"+self.chips
+            """
             if self.chips == "all":
                 self.chips_dir = "Chips/CleanedCroppedChips"
             elif self.chips == "post2020":
@@ -44,6 +49,7 @@ class dataset_class():
                 self.chips_dir = "Chips/Post2010_Cropped"
             else:
                 raise Exception(f"Unsupported chips type: {self.chips}")
+            """
             
             # Extracting placement settings
             self.placement_type = self.settings["placement"]["type"]

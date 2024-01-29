@@ -5,7 +5,7 @@ Creates a dataset using object images (such as Table Chips) and Background Image
 
 This repository is structured as follows: 
 - Backgrounds: the choice of background images we want to use. If we want to use different backgrounds, we can just create a new subfolder in this.
-- Chips: the Table Chips. We have uncropped and circle-cropped. I went through and cleaned the circle-cropped, and I put the few bad images in the badChips folder. If we want other objects to overlay on the backgrounds, we just create a new subfolder in this.
+- Chips: the Table Chips. We have uncropped and circle-cropped. I went through and cleaned the circle-cropped, and I put the few bad images in the badChips folder. If we want other objects to overlay on the backgrounds, we just create a new subfolder in this. I also made folders for post-2010 and post-2020 chips. 
 - Dataset: the resulting datasets that are created.  
 - lib: Supporting files and Jupyter notebooks.
 - Dataset Creation.ipynb - The Primary Notebook for this repo that controls everything. If you want to make a dataset, open this file, fill in the settings within the file, and make your dataset!

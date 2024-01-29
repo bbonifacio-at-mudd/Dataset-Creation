@@ -170,6 +170,66 @@ class dataset_class():
             # Save the combined image to the output path
             background.save(output_image_path)
 
+    def create_multiple_dataset(self):
+        # Create the dataset
+        for i in tqdm(range(self.size), desc = "Creating Dataset"):
+            # Randomly select a number of chips and a background
+            num_chips = random.randint(self.multiple_settings["num_chips_range"][0], self.multiple_settings["num_chips_range"][1])
+            selected_chips = random.sample(self.chips, num_chips)
+            selected_background = random.choice(self.backgrounds)
+
+            output_image_path = os.path.join(self.folder_name, f"{i}.png")
+
+            # Load the background image
+            background = Image.open(selected_background).convert("RGBA")
+
+            # Background dimensions
+            bg_width, bg_height = background.size
+
+            # Initialize the list of chips to add with their positions and mask
+            chips_to_add = []
+
+            for chip_path in selected_chips:
+                # Load and process each chip
+                chip = Image.open(chip_path).convert("RGBA")
+                
+                # Randomly rotate the chip if desired
+                if self.multiple_settings["random_rotation"]:
+                    angle = random.randint(0, 360)
+                    chip = chip.rotate(angle, expand=1)
+
+                # Determine a random scale factor based on the background width and settings
+                self.size_range = self.multiple_settings["size_range"]
+                scale_factor = random.uniform(self.size_range[0], self.size_range[1])
+                new_chip_width = int(bg_width * scale_factor)
+
+                # Calculate new height to maintain aspect ratio
+                chip_aspect_ratio = chip.width / chip.height
+                new_chip_height = int(new_chip_width / chip_aspect_ratio)
+
+                # Resize the chip
+                chip = chip.resize((new_chip_width, new_chip_height), Image.Resampling.LANCZOS)
+
+                # Randomly position the resized chip on the background
+                max_x, max_y = bg_width - new_chip_width, bg_height - new_chip_height
+                pos_x = random.randint(0, max_x)
+                pos_y = random.randint(0, max_y)
+
+                # Extract the alpha channel from the chip as the transparency mask
+                mask = chip.split()[3]
+
+                # Add the chip to the list of chips to add along with its data
+                chips_to_add.append((chip, pos_x, pos_y, mask))
+
+            # Sort the chips by size with the largest chips first - small measure to prevent total overlap. Doesn't guarantee no overlap
+            chips_to_add.sort(key=lambda x: x[0].size[0], reverse=True)
+
+            # Add the chips to the background
+            for chip, pos_x, pos_y, mask in chips_to_add:
+                background.paste(chip, (pos_x, pos_y), mask)
+
+            # Save the combined image to the output path
+            background.save(output_image_path)
 
 
 import os

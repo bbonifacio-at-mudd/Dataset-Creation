@@ -39,6 +39,9 @@ class dataset_class():
                 self.chips_dir = "Chips/CleanedCroppedChips"
             elif self.chips == "post2020":
                 self.chips_dir = "Chips/Post2020"
+                self.chips_dir = "Chips/Post2020_Cropped"
+            elif self.chips == "post2010":
+                self.chips_dir = "Chips/Post2010_Cropped"
             else:
                 raise Exception(f"Unsupported chips type: {self.chips}")
             

@@ -1,13 +1,13 @@
 #This file is not a script - only use it from the Dataset Creation jupyter notebook
 
-class dataset():
+class dataset_class():
     """
     Class for creating the dataset. Used in the Dataset Creation jupyter notebook. 
     """
 
     def __init__(self, size, folder_name, settings):
         self.size = size
-        self.folder_name = "../Dataset/" + folder_name
+        self.folder_name = "Dataset/" + folder_name
         self.settings = settings
         self.extract_settings()
         self.backgrounds = []
@@ -21,24 +21,24 @@ class dataset():
             # Extracting background settings
             self.background = self.data_settings["background"]
             if self.background == "random":
-                self.background_dir = "../Backgrounds/Random"
+                self.background_dir = "Backgrounds/Random"
             elif self.background == "walls":
-                self.background_dir = "../Backgrounds/Walls"
+                self.background_dir = "Backgrounds/Walls"
             elif self.background == "simple":
-                self.background_dir = "../Backgrounds/Simple"
+                self.background_dir = "Backgrounds/Simple"
             elif self.background == "desktop_backgrounds":
-                self.background_dir = "../Backgrounds/Desktop_Backgrounds"
+                self.background_dir = "Backgrounds/Desktop_Backgrounds"
             elif self.background == "landscape":
-                self.background_dir = "../Backgrounds/Landscape"
+                self.background_dir = "Backgrounds/Landscape"
             else:
                 raise Exception(f"Unsupported background type: {self.background}")
             
             # Extracting chips settings
             self.chips = self.data_settings["chips"]
             if self.chips == "all":
-                self.chips_dir = "../Chips/CleanedCroppedChips"
+                self.chips_dir = "Chips/CleanedCroppedChips"
             elif self.chips == "post2020":
-                self.chips_dir = "../Chips/Post2020"
+                self.chips_dir = "Chips/Post2020"
             else:
                 raise Exception(f"Unsupported chips type: {self.chips}")
             

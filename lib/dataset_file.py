@@ -12,6 +12,7 @@ class dataset_class():
         self.extract_settings()
         self.backgrounds = []
         self.chips = []
+        self.truth_data = []
 
     def extract_settings(self):
         try: 
@@ -179,6 +180,16 @@ class dataset_class():
             # Save the combined image to the output path
             background.save(output_image_path)
 
+            # Calculate normalized coordinates for the bounding box
+            norm_x_center = (pos_x + new_chip_width / 2) / bg_width
+            norm_y_center = (pos_y + new_chip_height / 2) / bg_height
+            norm_width = new_chip_width / bg_width
+            norm_height = new_chip_height / bg_height
+
+            # Append truth data for this image (class_id, x_center, y_center, width, height)
+            self.truth_data.append([str(i) + ".png", norm_x_center, norm_y_center, norm_width, norm_height])
+
+
     def create_multiple_dataset(self):
         # Create the dataset
         for i in tqdm(range(self.size), desc = "Creating Dataset"):
@@ -240,9 +251,17 @@ class dataset_class():
             # Save the combined image to the output path
             background.save(output_image_path)
 
+    def save_truth_data_to_csv(self, csv_file_path):
+        with open(csv_file_path, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['image_name', 'x_center', 'y_center', 'width', 'height'])
+            for data in self.truth_data:
+                writer.writerow(data)
+
 
 import os
 import shutil
 import random
 from PIL import Image
 from tqdm import tqdm
+import csv

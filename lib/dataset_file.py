@@ -133,6 +133,8 @@ class dataset_class():
 
         # Create the dataset folder
         os.mkdir(self.folder_name)
+        os.mkdir(self.folder_name + "/images")
+        os.mkdir(self.folder_name + "/labels")
         print(f"Created {self.folder_name}")
 
 
@@ -149,7 +151,7 @@ class dataset_class():
         # Randomly select a chip and a background, and place the chip on the background
         selected_chip = random.choice(self.chips)
 
-        output_image_path = os.path.join(self.folder_name, f"{i}.png")
+        output_image_path = os.path.join(self.folder_name + "/images/", f"{i}.png")
 
         # Load the chip and background images
         chip = Image.open(selected_chip).convert("RGBA")
@@ -222,13 +224,14 @@ class dataset_class():
         # Finally, save the truth value
         if self.truth_data_settings == "cartesian":
             self.save_truth_data_to_csv(self.folder_name + "/truth_data.csv")
+        self.save_to_YOLO_format()
 
 
 
     def process_multiple_images(self, i, selected_background):
         num_chips = random.randint(self.multiple_settings["num_chips_range"][0], self.multiple_settings["num_chips_range"][1])
         selected_chips = random.sample(self.chips, num_chips)
-        output_image_path = os.path.join(self.folder_name, f"{i}.png")
+        output_image_path = os.path.join(self.folder_name + "/images/", f"{i}.png")
 
         # Load the background image
         background = Image.open(selected_background).convert("RGBA")
@@ -305,6 +308,24 @@ class dataset_class():
                 widths_str = ';'.join(map(str, data[3]))
                 heights_str = ';'.join(map(str, data[4]))
                 writer.writerow([data[0], x_centers_str, y_centers_str, widths_str, heights_str])
+
+    def save_to_YOLO_format(self):
+            images_path = os.path.join(self.folder_name, 'images')
+            labels_path = os.path.join(self.folder_name, 'labels')
+
+            for data in self.truth_data:
+                image_name = data[0]
+                x_centers = data[1]
+                y_centers = data[2]
+                widths = data[3]
+                heights = data[4]
+                
+                # Create label file - img already exists
+                label_file_name = image_name.replace('.png', '.txt')
+                with open(os.path.join(labels_path, label_file_name), 'w') as f:
+                    for x_center, y_center, width, height in zip(x_centers, y_centers, widths, heights):
+                        # Write the YOLO formatted label (class_idx x_center y_center width height)
+                        f.write(f"0 {x_center} {y_center} {width} {height}\n")
 
 
 

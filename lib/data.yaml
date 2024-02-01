@@ -1,0 +1,5 @@
+names:
+- class_name
+nc: 1
+train: ../Dataset/tiny_yolo_test/images
+val: ../Dataset/tiny_yolo_test/images
